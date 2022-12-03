@@ -1,0 +1,7 @@
+{
+  "name": "NyoreNyoreAccounting",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
