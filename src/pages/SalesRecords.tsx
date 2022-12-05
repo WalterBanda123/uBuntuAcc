@@ -15,6 +15,8 @@ import {
 } from "@ionic/react";
 import React from "react";
 import FabButton from "../components/FabButton";
+import SaleRecordComponent from "../components/SaleRecordComponent";
+import { SALE_DATA } from "../data/Sale";
 
 const SalesRecords: React.FC = () => {
   return (
@@ -22,20 +24,23 @@ const SalesRecords: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/home" mode="ios" />
+            <IonBackButton
+              defaultHref="/home"
+              mode="ios"
+              text="Sales Records"
+            />
           </IonButtons>
-          <IonTitle>Sales records</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-       <FabButton routerLink={undefined}/>
-        <IonRow>
-          <IonCol>
-            <IonLabel>
-              <h2>Wait for the sales records for each month and year</h2>
-            </IonLabel>
-          </IonCol>
-        </IonRow>
+        <FabButton routerLink={undefined} />
+        {SALE_DATA.map((saleRecord) => (
+          <SaleRecordComponent
+            key={saleRecord.saleId}
+            saleTitle={saleRecord.saleTitle}
+            routerLink={`/sales-records/${saleRecord.saleId}`}
+          />
+        ))}
       </IonContent>
     </IonPage>
   );
