@@ -62,7 +62,7 @@ const SalesRecords: React.FC = () => {
             routerLink={undefined}
             onClickHandler={startAddSaleRecordHandler}
           />
-          {salesReocrdsCtx.salesRecords.map((saleRecord) => (
+          {salesReocrdsCtx.salesRecords.reverse().map((saleRecord) => (
             <SaleRecordComponent
               key={saleRecord.id}
               saleTitle={saleRecord.title}

@@ -80,7 +80,7 @@ const SalesReocrdTransactions: React.FC = (props) => {
             routerLink={undefined}
             onClickHandler={startAddingTransHandler}
           />
-          {selectedSaleRecord?.transactions.map((trans) => (
+          {selectedSaleRecord?.transactions.reverse().map((trans) => (
             <SaleTransComponent
               key={trans.id}
               productTitle={trans.productTitle}
