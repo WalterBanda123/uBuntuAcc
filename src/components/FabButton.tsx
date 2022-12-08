@@ -4,13 +4,14 @@ import {add} from "ionicons/icons";
 
 interface fabContent {
   routerLink: any;
+  onClickHandler:any
 }
 
 
 const FabButton: React.FC<fabContent> = (props) => {
   return (
     <IonFab vertical="bottom" horizontal="end" slot="fixed">
-      <IonFabButton  routerLink={props.routerLink}>
+      <IonFabButton  routerLink={props.routerLink} onClick={props.onClickHandler}>
         <IonIcon icon={add}/>
       </IonFabButton>
     </IonFab>

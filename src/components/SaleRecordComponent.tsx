@@ -12,13 +12,14 @@ import {
 import React from "react";
 
 interface saleRecord {
-  saleTitle: String;
-  routerLink:any
+  saleTitle: string;
+  saleDate: Date;
+  routerLink: any;
 }
 
 const SaleRecordComponent: React.FC<saleRecord> = (props) => {
   return (
-    <IonCard button routerLink={props.routerLink} >
+    <IonCard button routerLink={props.routerLink}>
       <IonCardContent>
         <IonCardHeader>
           <IonGrid>
@@ -26,8 +27,10 @@ const SaleRecordComponent: React.FC<saleRecord> = (props) => {
               <IonCol size="9">
                 <IonCardSubtitle>{props.saleTitle}</IonCardSubtitle>
               </IonCol>
-              
             </IonRow>
+            <IonLabel>
+              <small color="black">{props.saleDate.toDateString()}</small>
+            </IonLabel>
           </IonGrid>
         </IonCardHeader>
       </IonCardContent>
