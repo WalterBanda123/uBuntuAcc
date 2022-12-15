@@ -16,9 +16,30 @@ export const INVENTORY = [
 
     },
     { id:"inv3",
+        name:"Mazoe Orange Crush ",
+        price_per_item:"3.20",
+        quantity_in_stock:"600",
+        date_bought:new Date()
+
+    },
+    { id:"inv4",
+        name:"Matemba ",
+        price_per_item:"1.50",
+        quantity_in_stock:"600",
+        date_bought:new Date()
+
+    },
+    { id:"inv5",
         name:"Apples",
         price_per_item:"0.45",
         quantity_in_stock:"700",
+        date_bought:new Date()
+
+    },
+    { id:"inv6",
+        name:"Bottled Water",
+        price_per_item:"0.10",
+        quantity_in_stock:"1000",
         date_bought:new Date()
 
     }

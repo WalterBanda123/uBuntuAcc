@@ -38,14 +38,14 @@ const SaleTransComponent: React.FC<saleTrans> = (props) => {
             <IonRow>
               <IonCol size="11">
                 <h2>
-                  Product Title: <strong>{props.productTitle}</strong>{" "}
+                  <i>Product Title:</i> <strong>{props.productTitle}</strong>{" "}
                 </h2>
                 <h4>
-                  Products Sold: <strong>{props.productQuantity}</strong>
+                <i>Products Sold:</i> <strong>{props.productQuantity}</strong>
                 </h4>
                 <h5>
-                  Amount Paid:
-                  <i>
+                <i>Amount Paid:
+                 
                     <b>${props.amountPaid}USD</b>
                   </i>
                 </h5>

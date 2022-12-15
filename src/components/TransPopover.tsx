@@ -28,11 +28,11 @@ const TransPopover: React.FC<popover> = (props) => {
       triggerAction={props.triggerActions}
     >
       <IonContent>
-        <IonItem button routerLink={props.readInformation}>
+        <IonItem button onClick={props.readInformation}>
           <IonIcon icon={documentTextOutline} />
           Transaction Information
         </IonItem>
-        <IonItem button routerLink={props.editTrans}>
+        <IonItem button onClick={props.editTrans}>
           <IonIcon icon={pencilOutline} color="success" />
           Edit transaction
         </IonItem>

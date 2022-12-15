@@ -9,6 +9,7 @@ import {
   IonDatetimeButton,
   IonGrid,
   IonIcon,
+  IonItem,
   IonLabel,
   IonRow,
 } from "@ionic/react";
@@ -24,27 +25,29 @@ interface saleRecord {
 
 const SaleRecordComponent: React.FC<saleRecord> = (props) => {
   return (
-    <IonCard button routerLink={props.routerLink}>
-      <IonCardContent>
-        <IonGrid>
-          <IonRow>
-            <IonCol>
-              <IonLabel>
-                <h1>
-                  <strong> {props.saleTitle.toLocaleUpperCase()}</strong>
-                </h1>
-                <h3>{props.totalTransactions} Transactions Recorded</h3>
-                <small color="black">
-                  <b>
-                    <i>{props.saleDate.toDateString()}</i>
-                  </b>
-                </small>
-              </IonLabel>
-            </IonCol>
-          </IonRow>
-        </IonGrid>
-      </IonCardContent>
-    </IonCard>
+    <IonItem button routerLink={props.routerLink}>
+      <IonGrid>
+        <IonRow>
+          <IonCol>
+            <IonLabel>
+              <h1>
+                <strong>
+                  <i>{props.saleTitle.toLocaleUpperCase()}</i>
+                </strong>
+              </h1>
+              <h3>
+                <i>{props.totalTransactions} Transactions Recorded</i>
+              </h3>
+              <small color="black">
+                <b>
+                  <i>{props.saleDate.toDateString()}</i>
+                </b>
+              </small>
+            </IonLabel>
+          </IonCol>
+        </IonRow>
+      </IonGrid>
+    </IonItem>
   );
 };
 
