@@ -1,20 +1,26 @@
 import {
+  IonAlert,
   IonBackButton,
   IonButtons,
+  IonCol,
   IonContent,
   IonDatetime,
+  IonGrid,
   IonHeader,
+  IonItem,
   IonPage,
+  IonRow,
+  IonSearchbar,
   IonToolbar,
 } from "@ionic/react";
-import { time } from "console";
 import React, { useContext, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import AddTransactionModal from "../components/AddTransactionModal";
 import FabButton from "../components/FabButton";
 import SaleTransComponent from "../components/SaleTransComponent";
-import { SALE_DATA } from "../data/Sale";
+import TransPopover from "../components/TransPopover";
 import SalesRecordContext from "../data/Sales-Context";
+import "../theme/recordTransactions.css";
 
 const SalesReocrdTransactions: React.FC = (props) => {
   const salesRecordsCtx = useContext(SalesRecordContext);
@@ -55,8 +61,36 @@ const SalesReocrdTransactions: React.FC = (props) => {
     setIsAdding(false);
   };
 
+  const [showAlert, setShowAlert] = useState(false);
+  const deleteTransactionHandler = () => {
+    console.log("Transaction was successfully deleted");
+  };
+
+  const startDeletingTransHandler = ()=>{
+    setShowAlert(true);
+  };
+
   return (
     <React.Fragment>
+      <IonAlert
+        isOpen={showAlert}
+        onDidDismiss={() => setShowAlert(false)}
+        header="Delete Transaction"
+        message="Are you sure? Deleted transation is lost forever."
+        buttons={[
+          {
+            text: "Yes",
+            handler: deleteTransactionHandler,
+          },
+          {
+            text: "Cancel",
+            role: "cancel",
+            handler: () => {
+              setShowAlert(false);
+            },
+          },
+        ]}
+      />
       <AddTransactionModal
         onCancel={cancelAddingHandler}
         onSave={saveTransactionHandler}
@@ -65,8 +99,9 @@ const SalesReocrdTransactions: React.FC = (props) => {
       <IonPage>
         <IonHeader>
           <IonToolbar mode="ios">
-            <IonButtons color="dark">
+            <IonButtons>
               <IonBackButton
+                color="dark"
                 defaultHref="/sales-records"
                 text={selectedSaleRecord?.title.concat(
                   selectedSaleRecord.date.toDateString()
@@ -80,14 +115,30 @@ const SalesReocrdTransactions: React.FC = (props) => {
             routerLink={undefined}
             onClickHandler={startAddingTransHandler}
           />
-          {selectedSaleRecord?.transactions.reverse().map((trans) => (
-            <SaleTransComponent
-              key={trans.id}
-              productTitle={trans.productTitle}
-              productQuantity={trans.quantitySold}
-              amountPaid={trans.amountPaid}
-            />
-          ))}
+
+          <div className="searchbar-container">
+            <IonItem>
+              <IonSearchbar mode="ios" />
+            </IonItem>
+          </div>
+          <IonGrid>
+            <IonRow>
+              <IonCol>
+                {selectedSaleRecord?.transactions.reverse().map((trans) => (
+                  <SaleTransComponent
+                    key={trans.id}
+                    productTitle={trans.productTitle}
+                    productQuantity={trans.quantitySold}
+                    amountPaid={trans.amountPaid}
+                    id={trans.id} // routerLink={`/sale-trans/:recordId/${trans.id}`}
+                    deleteTransItem={startDeletingTransHandler}
+                    editTransItem={undefined}
+                    readTransInfro={undefined}
+                  />
+                ))}
+              </IonCol>
+            </IonRow>
+          </IonGrid>
         </IonContent>
       </IonPage>
     </React.Fragment>

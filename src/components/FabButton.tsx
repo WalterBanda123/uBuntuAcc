@@ -10,8 +10,8 @@ interface fabContent {
 
 const FabButton: React.FC<fabContent> = (props) => {
   return (
-    <IonFab vertical="bottom" horizontal="end" slot="fixed">
-      <IonFabButton  routerLink={props.routerLink} onClick={props.onClickHandler}>
+    <IonFab vertical="bottom" horizontal="end" slot="fixed" >
+      <IonFabButton  routerLink={props.routerLink} onClick={props.onClickHandler} color="dark">
         <IonIcon icon={add}/>
       </IonFabButton>
     </IonFab>

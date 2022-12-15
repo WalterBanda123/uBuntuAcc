@@ -53,6 +53,7 @@ const SalesRecords: React.FC = () => {
                 defaultHref="/home"
                 mode="ios"
                 text="Sales Records"
+                color="dark"
               />
             </IonButtons>
           </IonToolbar>
@@ -68,6 +69,7 @@ const SalesRecords: React.FC = () => {
               saleTitle={saleRecord.title}
               routerLink={`/sales-records/${saleRecord.id}`}
               saleDate={saleRecord.date}
+              totalTransactions={saleRecord.transactions.length}
             />
           ))}
         </IonContent>

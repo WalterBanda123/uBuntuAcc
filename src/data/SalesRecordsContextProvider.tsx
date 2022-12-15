@@ -9,7 +9,7 @@ const SalesRecordsContextProvider: React.FC<{ children: any }> = (props) => {
       date: new Date(),
       transactions: [
         {
-          id: new Date().toDateString(),
+          id: Math.random.toString(),
           productTitle: "Mirinda Orange",
           productPrice: 300,
           quantitySold: 60,
@@ -45,7 +45,7 @@ const SalesRecordsContextProvider: React.FC<{ children: any }> = (props) => {
   ) => {
     setRecords((salesRecords) => {
       const newTransaction: Transaction = {
-        id: new Date().toDateString(),
+        id: Math.random.toString(),
         productTitle,
         productPrice: price,
         quantitySold: quantity,

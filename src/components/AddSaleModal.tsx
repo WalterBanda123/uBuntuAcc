@@ -1,10 +1,14 @@
 import {
   IonButton,
+  IonButtons,
   IonCol,
   IonContent,
   IonDatetime,
+  IonFab,
+  IonFabButton,
   IonGrid,
   IonHeader,
+  IonIcon,
   IonInput,
   IonItem,
   IonItemDivider,
@@ -15,11 +19,14 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
+import { checkmark, closeOutline } from "ionicons/icons";
 import React, { useRef, useState } from "react";
 
-const AddSaleModal: React.FC<{ show: boolean; onCancel: () => void, onSave:(title:string, date: Date)=>void }> = (
-  props
-) => {
+const AddSaleModal: React.FC<{
+  show: boolean;
+  onCancel: () => void;
+  onSave: (title: string, date: Date) => void;
+}> = (props) => {
   const saleTitleRef = useRef<HTMLIonInputElement>(null);
   const saleDateRef = useRef<HTMLIonDatetimeElement>(null);
 
@@ -30,13 +37,13 @@ const AddSaleModal: React.FC<{ show: boolean; onCancel: () => void, onSave:(titl
     if (
       !enteredTitle ||
       !selectedDate ||
-      enteredTitle.toString().trim().length === 0 
+      enteredTitle.toString().trim().length === 0
     ) {
       setError("Please enter a valid title and select a date");
       return;
     }
-    setError("")
-    props.onSave(enteredTitle.toString(), new Date(selectedDate.toString()))
+    setError("");
+    props.onSave(enteredTitle.toString(), new Date(selectedDate.toString()));
   };
 
   const [error, setError] = useState("");
@@ -49,6 +56,26 @@ const AddSaleModal: React.FC<{ show: boolean; onCancel: () => void, onSave:(titl
         </IonToolbar>
       </IonHeader>
       <IonContent>
+        <IonFab
+          vertical="bottom"
+          horizontal="end"
+          slot="fixed"
+          onClick={onSaveHandler}
+        >
+          <IonFabButton color="success">
+            <IonIcon icon={checkmark}></IonIcon>
+          </IonFabButton>
+        </IonFab>
+        <IonFab
+          vertical="bottom"
+          horizontal="start"
+          slot="fixed"
+          onClick={props.onCancel}
+        >
+          <IonFabButton color="danger">
+            <IonIcon icon={closeOutline}></IonIcon>
+          </IonFabButton>
+        </IonFab>
         <IonGrid>
           <IonRow>
             <IonCol>
@@ -69,20 +96,10 @@ const AddSaleModal: React.FC<{ show: boolean; onCancel: () => void, onSave:(titl
           {error && (
             <IonRow className="ion-text-center">
               <IonCol>
-                <IonText  color={"danger"}>{error}</IonText>
+                <IonText color={"danger"}>{error}</IonText>
               </IonCol>
             </IonRow>
           )}
-          <IonRow className="ion-text-center">
-            <IonCol>
-              <IonButton color={"medium"} onClick={props.onCancel}>
-                Cancel
-              </IonButton>
-            </IonCol>
-            <IonCol>
-              <IonButton fill="clear" onClick={onSaveHandler}>Save</IonButton>
-            </IonCol>
-          </IonRow>
         </IonGrid>
       </IonContent>
     </IonModal>

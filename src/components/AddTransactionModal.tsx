@@ -13,12 +13,15 @@ import {
   IonLabel,
   IonModal,
   IonRow,
+  IonSearchbar,
+  IonSelect,
+  IonSelectOption,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
 import { checkmark, closeOutline } from "ionicons/icons";
-import React, { useRef } from "react";
-
+import React, { useRef, useState } from "react";
+import { INVENTORY } from "../data/Sale";
 
 const AddTransactionModal: React.FC<{
   onCancel: () => void;
@@ -32,6 +35,16 @@ const AddTransactionModal: React.FC<{
     discountAllowed: any
   ) => void;
   show: boolean;
+  EditedTransaction: {
+    id: string;
+    productTitle: string;
+    productPrice: number;
+    quantitySold: number;
+    amountPaid: number;
+    changeLeft: number;
+    customerName: string;
+    discountAllowed: number;
+  };
 }> = (props) => {
   const titleRef = useRef<HTMLIonInputElement>(null);
   const priceRef = useRef<HTMLIonInputElement>(null);
@@ -42,7 +55,7 @@ const AddTransactionModal: React.FC<{
   const discountAllowedRef = useRef<HTMLIonInputElement>(null);
 
   const saveTransactionHandler = () => {
-    const enteredTitle = titleRef.current?.value;
+    //const enteredTitle = titleRef.current?.value;
     const enteredPrice = priceRef.current?.value;
     const enteredQuantity = quantityRef.current?.value;
     const enteredAmount = +enteredPrice! * +enteredQuantity!;
@@ -50,13 +63,13 @@ const AddTransactionModal: React.FC<{
     const enteredCustomer = customerNameRef.current?.value;
     const enteredDiscount = discountAllowedRef.current?.value;
 
-    if (!enteredTitle || !enteredPrice || !enteredAmount || !enteredQuantity) {
+    if (!chosenProduct || !enteredPrice || !enteredAmount || !enteredQuantity) {
       console.log("enter the title,price,change,and customer name");
       return;
     }
 
     props.onSave(
-      enteredTitle.toString(),
+      chosenProduct,
       enteredPrice,
       enteredQuantity,
       enteredAmount,
@@ -68,16 +81,23 @@ const AddTransactionModal: React.FC<{
     console.log("transaction saved");
   };
 
+  //const inventory_Item = INVENTORY.filter(inv_item => inv_item.name != null);
+  const [chosenProduct, setChosenProduct] = useState<any | string>(
+    props.EditedTransaction?.productTitle
+  );
+
+  const selectedProductHandler = (event: CustomEvent) => {
+    const selectedName = event.detail.value;
+    setChosenProduct(selectedName);
+  };
+
   return (
     <IonModal isOpen={props.show}>
       <IonHeader>
         <IonToolbar mode="ios">
-          <IonButtons>
-            <IonButton onClick={props.onCancel} slot="start">
-              <IonIcon slot="icon-only" icon={closeOutline}></IonIcon>
-            </IonButton>
-          </IonButtons>
-          <IonTitle>Add Transaction</IonTitle>
+          <IonTitle>
+            {props.EditedTransaction ? "Edit" : "Add"} Transaction
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
@@ -87,64 +107,117 @@ const AddTransactionModal: React.FC<{
           slot="fixed"
           onClick={saveTransactionHandler}
         >
-          <IonFabButton>
+          <IonFabButton color="success">
             <IonIcon icon={checkmark}></IonIcon>
+          </IonFabButton>
+        </IonFab>
+        <IonFab
+          vertical="bottom"
+          horizontal="start"
+          slot="fixed"
+          onClick={props.onCancel}
+        >
+          <IonFabButton color="danger">
+            <IonIcon icon={closeOutline}></IonIcon>
           </IonFabButton>
         </IonFab>
         <IonGrid>
           <IonRow>
             <IonCol>
               <IonItem>
-                <IonLabel position="floating">Product Name</IonLabel>
-                <IonInput type="text" ref={titleRef} />
+                <IonLabel position="stacked">Product Name</IonLabel>
+                <IonSelect
+                  mode="ios"
+                  onIonChange={selectedProductHandler}
+                  value={chosenProduct}
+                >
+                  {INVENTORY.map((inv) => (
+                    <IonSelectOption
+                      //key={inv.id}
+                      key={inv.id}
+                      value={
+                        // ? props.EditedTransaction.productTitle
+                        inv?.name
+                      }
+                    >
+                      {inv.name}
+                    </IonSelectOption>
+                  ))}
+                </IonSelect>
+                {/*  
+                <IonInput type="text" ref={titleRef} />*/}
               </IonItem>
             </IonCol>
           </IonRow>
           <IonRow>
             <IonCol>
               <IonItem>
-                <IonLabel position="floating">Product Price</IonLabel>
-                <IonInput type={"number"} ref={priceRef} />
+                <IonLabel position="stacked">Product Price</IonLabel>
+                <IonInput
+                  type={"number"}
+                  ref={priceRef}
+                  value={props.EditedTransaction?.productPrice.toFixed(3)}
+                />
               </IonItem>
             </IonCol>
           </IonRow>
           <IonRow>
             <IonCol>
               <IonItem>
-                <IonLabel position="floating">Quantity Sold</IonLabel>
-                <IonInput type={"number"} ref={quantityRef} />
+                <IonLabel position="stacked">Quantity Sold</IonLabel>
+                <IonInput
+                  type={"number"}
+                  ref={quantityRef}
+                  value={props.EditedTransaction?.quantitySold}
+                />
               </IonItem>
             </IonCol>
           </IonRow>
           <IonRow>
             <IonCol>
               <IonItem>
-                <IonLabel position="floating">Amount Paid</IonLabel>
-                <IonInput type={"number"} ref={amountPaidRef} />
+                <IonLabel position="stacked">Amount Paid</IonLabel>
+                <IonInput
+                  type={"number"}
+                  ref={amountPaidRef}
+                  value={props.EditedTransaction?.amountPaid.toFixed(3)}
+                />
               </IonItem>
             </IonCol>
           </IonRow>
           <IonRow>
             <IonCol>
               <IonItem>
-                <IonLabel position="floating">Change Left</IonLabel>
-                <IonInput type={"number"} ref={changeLeftRef} />
+                <IonLabel position="stacked">Change Left</IonLabel>
+                <IonInput
+                  type={"number"}
+                  ref={changeLeftRef}
+                  value={props.EditedTransaction?.changeLeft.toFixed(3)}
+                />
               </IonItem>
             </IonCol>
           </IonRow>
           <IonRow>
             <IonCol>
               <IonItem>
-                <IonLabel position="floating">Customer Name</IonLabel>
-                <IonInput type={"text"} ref={customerNameRef} />
+                <IonLabel position="stacked">Customer Name</IonLabel>
+                <IonInput
+                  type={"text"}
+                  ref={customerNameRef}
+                  value={props.EditedTransaction?.customerName}
+                />
               </IonItem>
             </IonCol>
           </IonRow>
           <IonRow>
             <IonCol>
               <IonItem>
-                <IonLabel position="floating">Discount Allowed</IonLabel>
-                <IonInput type={"number"} ref={discountAllowedRef} />
+                <IonLabel position="stacked">Discount Allowed</IonLabel>
+                <IonInput
+                  type={"number"}
+                  ref={discountAllowedRef}
+                  value={props.EditedTransaction?.discountAllowed.toFixed(3)}
+                />
               </IonItem>
             </IonCol>
           </IonRow>

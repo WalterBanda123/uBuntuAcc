@@ -24,6 +24,8 @@ import './theme/variables.css';
 import SalesRecords from './pages/SalesRecords';
 import SalesReocrdTransactions from './pages/SalesRecordTransactions';
 import SalesRecordsContextProvider from './data/SalesRecordsContextProvider';
+import EditTransaction from './pages/EditTransaction';
+import Inventory from './pages/InventoryPage';
 
 setupIonicReact();
 
@@ -41,6 +43,12 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/sales-records/:recordId">
           <SalesReocrdTransactions/>
+        </Route>
+        <Route exact path="/inventory">
+          <Inventory/>
+        </Route>
+        <Route exact path="/sales-records/:recordId/transId">
+          <EditTransaction />
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
