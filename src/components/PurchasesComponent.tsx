@@ -8,7 +8,7 @@ import {
 } from "@ionic/react";
 import React from "react";
 
-interface inventory {
+interface purchases {
   id: string;
   name: string;
   price_per_item: any;
@@ -17,7 +17,7 @@ interface inventory {
   editInventory:any
 }
 
-const InventoryComponent: React.FC<inventory> = (props) => {
+const PurchasesComponent: React.FC<purchases> = (props) => {
   return (
     <IonItem button onClick={props.editInventory}>
       <IonLabel>
@@ -30,4 +30,4 @@ const InventoryComponent: React.FC<inventory> = (props) => {
   );
 };
 
-export default InventoryComponent;
+export default PurchasesComponent;

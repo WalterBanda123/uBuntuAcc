@@ -4,12 +4,12 @@ import SalesRecordContext, { SalesRecord, Transaction } from "./Sales-Context";
 const SalesRecordsContextProvider: React.FC<{ children: any }> = (props) => {
   const [records, setRecords] = useState<SalesRecord[]>([
     {
-      id: Math.random().toFixed(5).toString(),
+      id: Math.random().toString(),
       title: "Tuesday Sales",
       date: new Date(),
       transactions: [
         {
-          id: Math.random().toFixed(5).toString(),
+          id: Math.random().toString(),
           productTitle: "Mirinda Orange",
           productPrice: 300,
           quantitySold: 60,
@@ -24,7 +24,7 @@ const SalesRecordsContextProvider: React.FC<{ children: any }> = (props) => {
 
   const addRecord = (title: string, date: Date) => {
     const newSalesReocrd: SalesRecord = {
-      id: Math.random().toFixed(5).toString(),
+      id: Math.random().toString(),
       title: title,
       date: date,
       transactions: [],
@@ -45,7 +45,7 @@ const SalesRecordsContextProvider: React.FC<{ children: any }> = (props) => {
   ) => {
     setRecords((salesRecords) => {
       const newTransaction: Transaction = {
-        id: Math.random().toFixed(5).toString(),
+        id: Math.random().toString(),
         productTitle,
         productPrice: price,
         quantitySold: quantity,
