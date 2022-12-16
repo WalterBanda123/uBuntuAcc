@@ -23,11 +23,11 @@ const EditPurchasesModal: React.FC<{
   onCancel: () => void;
   onSaveInventory: () => void;
   EditedInventory: {
+   
     id: string;
-    name: string;
-    price_per_item: any;
-    quantity_in_stock: any;
-    date_bought: Date;
+    itemTitle: string;
+    itemQuantity: any;
+    pricePerItem: any;
   };
   show: boolean;
 }> = (props) => {
@@ -41,7 +41,7 @@ const EditPurchasesModal: React.FC<{
       <IonHeader>
         <IonToolbar>
           <IonTitle>
-            {props.EditedInventory ? "Edit" : "Add"} Inventory
+            {props.EditedInventory ? "Edit" : "Add"} Purchases
           </IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -71,7 +71,7 @@ const EditPurchasesModal: React.FC<{
             <IonCol>
               <IonItem >
                 <IonLabel position="stacked">Inventory Name</IonLabel>
-                <IonInput type="text" value={props.EditedInventory?.name} />
+                <IonInput type="text" value={props.EditedInventory?.itemTitle} />
               </IonItem>
             </IonCol>
           </IonRow>
@@ -81,7 +81,7 @@ const EditPurchasesModal: React.FC<{
                 <IonLabel position="stacked">Price per item</IonLabel>
                 <IonInput
                   type="number"
-                  value={props.EditedInventory?.price_per_item}
+                  value={props.EditedInventory?.pricePerItem}
                 />
               </IonItem>
             </IonCol>
@@ -92,12 +92,12 @@ const EditPurchasesModal: React.FC<{
                 <IonLabel position="stacked">Quantity in stock</IonLabel>
                 <IonInput
                   type="text"
-                  value={props.EditedInventory?.quantity_in_stock}
+                  value={props.EditedInventory?.itemQuantity}
                 />
               </IonItem>
             </IonCol>
           </IonRow>
-          <IonRow>
+         {/*  <IonRow>
             <IonCol>
               <IonItem>
                 <IonLabel position="stacked">Date of Purchase</IonLabel>.
@@ -107,7 +107,7 @@ const EditPurchasesModal: React.FC<{
                 />
               </IonItem>
             </IonCol>
-          </IonRow>
+          </IonRow>*/}
         </IonGrid>
       </IonContent>
     </IonModal>

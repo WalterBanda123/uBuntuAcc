@@ -1,5 +1,23 @@
 
 
+export const PURCHASES = [
+    {
+        purchaseId: "purch_1",
+        purchasesTitle: "Purchases Black friday",
+        storeName: "Mahommad Mussa",
+        dateBought: new Date().getUTCDate(),
+        purchasedItems: [
+            {
+                id:"inv1",
+                name:"Oranges ",
+                price_per_item:"0.30",
+                quantity_in_stock:"300", 
+            }
+        ]
+
+    }
+]
+
 export const INVENTORY = [
     { id:"inv1",
         name:"Oranges ",
