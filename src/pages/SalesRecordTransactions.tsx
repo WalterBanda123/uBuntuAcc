@@ -10,6 +10,7 @@ import {
   IonIcon,
   IonItem,
   IonLabel,
+  IonList,
   IonModal,
   IonPage,
   IonRow,
@@ -172,7 +173,9 @@ const SalesReocrdTransactions: React.FC = (props) => {
         onCancel={cancelAddingHandler}
         onSave={saveTransactionHandler}
         show={isAdding}
-        EditedTransaction={selectedTrans} dismiss={()=>setIsAdding(false)}      />
+        EditedTransaction={selectedTrans}
+        dismiss={() => setIsAdding(false)}
+      />
       <IonPage>
         <IonHeader>
           <IonToolbar mode="ios">
@@ -199,41 +202,36 @@ const SalesReocrdTransactions: React.FC = (props) => {
             </IonItem>
           </div>
           <IonGrid>
-            <IonRow>
-              <IonCol>
-                {selectedSaleRecord?.transactions.length === 0 ? (
-                  <IonRow className="ion-text-center">
-                    <IonCol>
-                      <IonLabel>
-                        <h2>
-                          <strong>
-                            No transactions recorded.<br></br> Start adding your
-                            transactions!
-                          </strong>
-                          <IonIcon icon={happyOutline} size="large" />
-                        </h2>
-                      </IonLabel>
-                    </IonCol>
-                  </IonRow>
-                ) : (
-                  selectedSaleRecord?.transactions.reverse().map((trans) => (
-                    <SaleTransComponent
-                      key={trans.id}
-                      productTitle={trans.productTitle}
-                      productQuantity={trans.quantitySold}
-                      amountPaid={trans.amountPaid}
-                      id={trans.id} // routerLink={`/sale-trans/:recordId/${trans.id}`}
-                      deleteTransItem={startDeletingTransHandler}
-                      editTransItem={EditTransHandler.bind(null, trans.id)}
-                      readTransInfro={readTransInforHandler.bind(
-                        null,
-                        trans.id
-                      )}
-                    />
-                  ))
-                )}
-              </IonCol>
-            </IonRow>
+            <IonList>
+              {selectedSaleRecord?.transactions.length === 0 ? (
+                <IonRow className="ion-text-center">
+                  <IonCol>
+                    <IonLabel>
+                      <h2>
+                        <strong>
+                          No transactions recorded.<br></br> Start adding your
+                          transactions!
+                        </strong>
+                        <IonIcon icon={happyOutline} size="large" />
+                      </h2>
+                    </IonLabel>
+                  </IonCol>
+                </IonRow>
+              ) : (
+                selectedSaleRecord?.transactions.reverse().map((trans) => (
+                  <SaleTransComponent
+                    key={trans.id}
+                    productTitle={trans.productTitle}
+                    productQuantity={trans.quantitySold}
+                    amountPaid={trans.amountPaid}
+                    id={trans.id} // routerLink={`/sale-trans/:recordId/${trans.id}`}
+                    deleteTransItem={startDeletingTransHandler}
+                    editTransItem={EditTransHandler.bind(null, trans.id)}
+                    readTransInfro={readTransInforHandler.bind(null, trans.id)}
+                  />
+                ))
+              )}
+            </IonList>
           </IonGrid>
         </IonContent>
       </IonPage>

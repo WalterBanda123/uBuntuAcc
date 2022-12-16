@@ -1,7 +1,28 @@
 import React, { useState } from "react";
-import SalesRecordContext, { SalesRecord, Transaction } from "./Sales-Context";
+import SalesRecordContext, {
+  PurchasesRecord,
+  SalesRecord,
+  Transaction,
+} from "./Sales-Context";
 
 const SalesRecordsContextProvider: React.FC<{ children: any }> = (props) => {
+  const [purchases, setPurchases] = useState<PurchasesRecord[]>([
+    {
+      purchaseId: "purch_1",
+      purchasesTitle: "Purchases Black friday",
+      storeName: "Mahommad Mussa",
+      dateBought: new Date(),
+      purchasedItems: [
+        {
+          id: "inv1",
+          itemTitle: "Oranges ",
+          itemQuantity: "300",
+          pricePerItem: "0.30",
+        },
+      ],
+    },
+  ]);
+
   const [records, setRecords] = useState<SalesRecord[]>([
     {
       id: Math.random().toString(),
@@ -33,6 +54,24 @@ const SalesRecordsContextProvider: React.FC<{ children: any }> = (props) => {
       return curSalesRecords.concat(newSalesReocrd);
     });
   };
+
+  const addPurchaseRecord = (
+    title: string,
+    storeName: string,
+    dateOfPurch: Date
+  ) => {
+    const newPurchaseRecord: PurchasesRecord = {
+      purchaseId: Math.random().toString(),
+      purchasesTitle: title,
+      storeName: storeName,
+      dateBought: dateOfPurch,
+      purchasedItems: [],
+    };
+    setPurchases(curPurchasesRecords =>{
+      return curPurchasesRecords.concat(newPurchaseRecord);
+    });
+  };
+
   const addTransaction = (
     recordId: string,
     productTitle: string,
@@ -78,7 +117,9 @@ const SalesRecordsContextProvider: React.FC<{ children: any }> = (props) => {
     <SalesRecordContext.Provider
       value={{
         salesRecords: records,
+        purchasesRecords: purchases,
         addSaleRecord: addRecord,
+        addPurchaseRecord: addPurchaseRecord,
         addSaleTransaction: addTransaction,
         deleteSaleTransaction: deleteTransaction,
         updateSaleRecord: updateTransaction,
