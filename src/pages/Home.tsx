@@ -35,7 +35,7 @@ const Home: React.FC = () => {
           </IonRow>
           <IonRow>
             <IonCol>
-              <DashboardCardComponent title="Inventory" routerLink={undefined} />
+              <DashboardCardComponent title="Inventory" routerLink="/inventory" />
             </IonCol>
           </IonRow>
           <IonRow>

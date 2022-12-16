@@ -23,12 +23,17 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import SalesRecords from './pages/SalesRecords';
 import SalesReocrdTransactions from './pages/SalesRecordTransactions';
+import SalesRecordsContextProvider from './data/SalesRecordsContextProvider';
+
+import Inventory from './pages/InventoryPage';
 
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
+      <SalesRecordsContextProvider>
+
       <IonRouterOutlet>
         <Route exact path="/home">
           <Home />
@@ -39,10 +44,14 @@ const App: React.FC = () => (
         <Route exact path="/sales-records/:recordId">
           <SalesReocrdTransactions/>
         </Route>
+        <Route exact path="/inventory">
+          <Inventory/>
+        </Route>
         <Route exact path="/">
           <Redirect to="/home" />
         </Route>
       </IonRouterOutlet>
+      </SalesRecordsContextProvider>
     </IonReactRouter>
   </IonApp>
 );
