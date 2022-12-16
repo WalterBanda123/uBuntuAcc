@@ -121,7 +121,7 @@ const SalesReocrdTransactions: React.FC = (props) => {
                     </h3>
                     <h3>
                       <strong>Cost per Item:</strong>
-                      <i>${transaction.productPrice.toFixed(3)}</i>
+                      <i>${transaction.productPrice}</i>
                     </h3>
                     <h3>
                       <strong>Quantity Sold:</strong>
@@ -129,11 +129,11 @@ const SalesReocrdTransactions: React.FC = (props) => {
                     </h3>
                     <h3>
                       <strong>Total Amount Paid:</strong>
-                      <i>${transaction.amountPaid.toFixed(3)}</i>
+                      <i>${transaction.amountPaid}</i>
                     </h3>
                     <h3>
                       <strong>Change Left:</strong>
-                      <i>${transaction.changeLeft.toFixed(3)}</i>
+                      <i>${transaction.changeLeft}</i>
                     </h3>
                     <h3>
                       <strong>Customer Name:</strong>
@@ -172,8 +172,7 @@ const SalesReocrdTransactions: React.FC = (props) => {
         onCancel={cancelAddingHandler}
         onSave={saveTransactionHandler}
         show={isAdding}
-        EditedTransaction={selectedTrans}
-      />
+        EditedTransaction={selectedTrans} dismiss={()=>setIsAdding(false)}      />
       <IonPage>
         <IonHeader>
           <IonToolbar mode="ios">
@@ -222,7 +221,7 @@ const SalesReocrdTransactions: React.FC = (props) => {
                       key={trans.id}
                       productTitle={trans.productTitle}
                       productQuantity={trans.quantitySold}
-                      amountPaid={trans.amountPaid.toFixed(3)}
+                      amountPaid={trans.amountPaid}
                       id={trans.id} // routerLink={`/sale-trans/:recordId/${trans.id}`}
                       deleteTransItem={startDeletingTransHandler}
                       editTransItem={EditTransHandler.bind(null, trans.id)}

@@ -19,7 +19,7 @@ import {
 import { checkmark, closeOutline } from "ionicons/icons";
 import React, { useState } from "react";
 
-const EditInventoryModal: React.FC<{
+const EditPurchasesModal: React.FC<{
   onCancel: () => void;
   onSaveInventory: () => void;
   EditedInventory: {
@@ -34,9 +34,9 @@ const EditInventoryModal: React.FC<{
   return (
     <IonModal
       isOpen={props.show}
-      initialBreakpoint={0.5}
-      breakpoints={[0, 0.5, 1]}
-      backdropBreakpoint={0.4}
+      //initialBreakpoint={0.9}
+     // breakpoints={[0, 0.9, 1]}
+     // backdropBreakpoint={0.4}
     >
       <IonHeader>
         <IonToolbar>
@@ -114,4 +114,4 @@ const EditInventoryModal: React.FC<{
   );
 };
 
-export default EditInventoryModal;
+export default EditPurchasesModal;

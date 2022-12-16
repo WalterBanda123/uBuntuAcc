@@ -10,12 +10,13 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import React, { useState } from "react";
-import EditInventoryModal from "../components/EditInventoryModal";
+import EditPurchasesModal from "../components/EditPurchasesModal";
+//import EditInventoryModal from "../components/EditPurchasesModal";
 import FabButton from "../components/FabButton";
-import InventoryComponent from "../components/InventoryComponent";
+import InventoryComponent from "../components/PurchasesComponent";
 import { INVENTORY } from "../data/Sale";
 
-const Inventory: React.FC = () => {
+const Purchases: React.FC = () => {
 
   const [isEditing, setIsEditing] = useState(false);
   const [selectedInventory, setSelectedInventory] = useState<any>();
@@ -27,6 +28,7 @@ const Inventory: React.FC = () => {
 
   const startEditHandler = ()=>{
     setIsEditing(true);
+    setSelectedInventory(null);
   }
 
   const EditInventoryHandler = (stockId: string) => {
@@ -43,7 +45,7 @@ const Inventory: React.FC = () => {
 
   return (
     <React.Fragment>
-      <EditInventoryModal
+      <EditPurchasesModal
         onCancel={cancelEditHandler}
         onSaveInventory={saveEditHandler}
         EditedInventory={selectedInventory}
@@ -53,7 +55,7 @@ const Inventory: React.FC = () => {
         <IonHeader>
           <IonToolbar mode="ios">
             <IonButtons slot="start">
-              <IonBackButton defaultHref="home" text="Inventory" color="dark" />
+              <IonBackButton defaultHref="home" text="Purchases" color="dark" />
             </IonButtons>
           </IonToolbar>
         </IonHeader>
@@ -79,4 +81,4 @@ const Inventory: React.FC = () => {
   );
 };
 
-export default Inventory;
+export default Purchases;

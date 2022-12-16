@@ -35,6 +35,7 @@ const AddTransactionModal: React.FC<{
     discountAllowed: any
   ) => void;
   show: boolean;
+  dismiss:()=>void;
   EditedTransaction: {
     id: string;
     productTitle: string;
@@ -92,7 +93,7 @@ const AddTransactionModal: React.FC<{
   };
 
   return (
-    <IonModal isOpen={props.show}>
+    <IonModal isOpen={props.show} onDidDismiss={props.dismiss}>
       <IonHeader>
         <IonToolbar mode="ios">
           <IonTitle>
@@ -156,7 +157,7 @@ const AddTransactionModal: React.FC<{
                 <IonInput
                   type={"number"}
                   ref={priceRef}
-                  value={props.EditedTransaction?.productPrice.toFixed(3)}
+                  value={props.EditedTransaction?.productPrice}
                 />
               </IonItem>
             </IonCol>
@@ -180,7 +181,7 @@ const AddTransactionModal: React.FC<{
                 <IonInput
                   type={"number"}
                   ref={amountPaidRef}
-                  value={props.EditedTransaction?.amountPaid.toFixed(3)}
+                  value={props.EditedTransaction?.amountPaid}
                 />
               </IonItem>
             </IonCol>
@@ -192,7 +193,7 @@ const AddTransactionModal: React.FC<{
                 <IonInput
                   type={"number"}
                   ref={changeLeftRef}
-                  value={props.EditedTransaction?.changeLeft.toFixed(3)}
+                  value={props.EditedTransaction?.changeLeft}
                 />
               </IonItem>
             </IonCol>
@@ -216,7 +217,7 @@ const AddTransactionModal: React.FC<{
                 <IonInput
                   type={"number"}
                   ref={discountAllowedRef}
-                  value={props.EditedTransaction?.discountAllowed.toFixed(3)}
+                  value={props.EditedTransaction?.discountAllowed}
                 />
               </IonItem>
             </IonCol>
